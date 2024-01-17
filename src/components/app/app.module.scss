@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Roboto:wght@400;500&display=swap');
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0;
+	font-weight: normal;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	font-weight: 400;
+	margin: 0;
+	background-color: rgba(235, 238, 243, 1);
+	overflow-x: hidden;
+	// font-family: 'Roboto', sans-serif; // в какой-то момент понадобится
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: inherit;
+}
+main {
+	padding: 18px;
+	max-width: 960px;
+	margin: 0 auto 24px;
+	background-color: rgba(255, 255, 255, 1);
+	box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.2);
+}
+:global(.container) {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+:global(.formContainer) {
+	max-width: 400px;
+	margin: 0 auto;
+}

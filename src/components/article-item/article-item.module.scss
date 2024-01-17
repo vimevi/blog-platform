@@ -1,0 +1,103 @@
+.ArticleItem {
+	display: flex;
+	justify-content: space-between;
+	border-radius: 10px;
+	background-color: #fff;
+	padding: 14px;
+	box-shadow: 4px 4px 13px 0px rgba(34, 60, 80, 0.16);
+	margin-bottom: 16px;
+}
+
+.ArticleItem + .ArticleItem {
+	margin-top: 26px;
+}
+
+.firstLine {
+	display: flex;
+	justify-content: space-between;
+	width: 700px;
+	overflow-wrap: break-word;
+	align-items: start;
+}
+.title {
+	max-width: 660px;
+	overflow-wrap: break-word;
+	padding-bottom: 4px;
+	color: rgba(24, 144, 255, 1);
+	font-size: 20px;
+	padding-right: 30px;
+	cursor: pointer;
+}
+.likeCount {
+	padding: 6px 0px 2px 30px;
+	position: relative;
+	cursor: pointer;
+}
+
+.likeCount::after {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 15px;
+	background: url('../../assets/images/like.svg') center/cover no-repeat;
+	top: 6px;
+	left: 6px;
+	cursor: pointer;
+}
+.liked::after {
+	background: url('../../assets/images/liked.svg') center/cover no-repeat;
+}
+.tags {
+	display: flex;
+	gap: 8px;
+}
+.tag {
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+	padding: 2px 6px 3px;
+	font-size: 12px;
+	overflow-wrap: break-word;
+	max-width: 210px;
+	max-height: 100px;
+	overflow: hidden;
+}
+
+.desc {
+	font-size: 12px;
+	line-height: 22px;
+	max-width: 682px;
+}
+.descFull {
+	max-width: 660px;
+	overflow-wrap: break-word;
+}
+.markdownBody {
+	max-width: 500px;
+	overflow-wrap: break-word;
+	// overflow-y: hidden;
+}
+.authorInfo {
+	display: flex;
+	flex-direction: column;
+}
+.author {
+	padding-top: 4px;
+	font-size: 18px;
+}
+.authorBlock {
+	display: flex;
+	justify-content: space-between;
+}
+.date {
+	font-size: 12px;
+	color: rgba(0, 0, 0, 0.5);
+	margin-left: auto;
+}
+.avatar {
+	padding-left: 12px;
+}
+.avatarImg {
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+}
