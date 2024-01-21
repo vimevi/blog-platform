@@ -21,6 +21,7 @@ export default function LoginForm() {
   const dispatch = useDispatch();
 
   const handleLogin = (data) => {
+    data.email = data.email.toLowerCase();
     dispatch(login(data));
   };
 
