@@ -5,7 +5,6 @@ const storedUser = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   isLoggedIn: false,
-  loading: true,
   error: null,
   email: storedUser?.user.email || null,
   token: storedUser?.user.token || null,
@@ -76,7 +75,6 @@ const userSlice = createSlice({
     clearLoginData(state) {
       state.loginStatus = "idle";
       state.error = null;
-      state.loading = false;
     },
   },
   extraReducers: (builder) => {
@@ -84,30 +82,25 @@ const userSlice = createSlice({
       .addCase(createUser.pending, (state) => {
         state.registerStatus = "loading";
         state.error = null;
-        state.loading = true;
         state.reloading = true;
       })
       .addCase(createUser.rejected, (state, action) => {
         state.registerStatus = "loading";
         state.error = action.payload;
-        state.loading = false;
         state.reloading = false;
       })
       .addCase(createUser.fulfilled, (state) => {
         state.registerStatus = "succeeded";
-        state.loading = false;
         state.reloading = false;
       })
       .addCase(login.pending, (state) => {
         state.loginStatus = "loading";
         state.error = null;
         state.error = null;
-        state.loading = true;
       })
       .addCase(login.rejected, (state, action) => {
         state.loginStatus = "failed";
         state.error = action.payload;
-        state.loading = false;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loginStatus = "succeeded";
@@ -117,10 +110,14 @@ const userSlice = createSlice({
         state.username = action.payload.user.username;
         state.image = action.payload.user.image;
         state.error = null;
-        state.loading = false;
       })
-      .addCase(editProfile.fulfilled, (state) => {
+      .addCase(editProfile.fulfilled, (state, action) => {
         state.editProfileStatus = "succeeded";
+        state.isLoggedIn = true;
+        state.email = action.payload.user.email;
+        state.username = action.payload.user.username;
+        state.image = action.payload.user.image;
+        state.error = null;
       })
       .addCase(editProfile.rejected, (state) => {
         state.editProfileStatus = "failed";

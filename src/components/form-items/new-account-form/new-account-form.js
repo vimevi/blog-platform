@@ -43,6 +43,9 @@ export default function NewAccountForm() {
   };
 
   useEffect(() => {
+    if (token) {
+      navigate("/articles");
+    }
     if (error) {
       message.error(error);
     }
