@@ -23,9 +23,9 @@ export default function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="new-article" element={<ArticleForm />} />
             <Route path="profile" element={<EditProfileForm />} />
+            <Route path="articles/:slug/edit" element={<ArticleForm />} />
           </Route>
           <Route path="articles/:slug" element={<ArticlePage />} />
-          <Route path="articles/:slug/edit" element={<ArticleForm />} />
           <Route
             path="*"
             element={<h3 className="spin">Nothing was found: 404!</h3>}
