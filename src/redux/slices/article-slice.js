@@ -9,7 +9,6 @@ const initialState = {
   article: {},
   error: null,
   articlesCount: 0,
-  isOpenFull: false,
   openFullstatus: "idle",
   slug: "",
 };
@@ -27,9 +26,9 @@ export const fetchArticles = createAsyncThunk(
 
 export const fetchFullArticle = createAsyncThunk(
   "article/fetchFullArticle",
-  async function (slug, { rejectWithValue }) {
+  async function ({ slug, token }, { rejectWithValue }) {
     try {
-      return await instanceArticleService.getArticlePage(slug);
+      return await instanceArticleService.getArticlePage(slug, token);
     } catch (e) {
       return rejectWithValue(e.message);
     }

@@ -27,7 +27,7 @@ class ArticleService {
       throw new Error("Server Error occurred!");
     }
 
-    const data = await response.json(); // await here
+    const data = await response.json();
     return data;
   }
 
@@ -42,8 +42,13 @@ class ArticleService {
     return this.performRequest(url, "GET");
   }
 
-  async getArticlePage(slug) {
+  async getArticlePage(slug, token) {
     const url = `articles/${slug}`;
+
+    if (token) {
+      return this.performRequest(url, "GET", token);
+    }
+
     return this.performRequest(url, "GET");
   }
 

@@ -34,9 +34,9 @@ export default function ArticlePage() {
 
   useEffect(() => {
     if (slug) {
-      dispatch(fetchFullArticle(slug));
+      dispatch(fetchFullArticle({ slug, token }));
     }
-  }, [dispatch, slug]);
+  }, [dispatch, slug, token]);
 
   useEffect(() => {
     setLike(article.favorited);
@@ -105,9 +105,9 @@ export default function ArticlePage() {
       message.info("Deletion cancelled");
     },
   };
-  const renderClass = (like) => {
-    return like ? `${styles.likeCount} ${styles.liked}` : styles.likeCount;
-  };
+  const likeClassName = like
+    ? `${styles.likeCount} ${styles.liked}`
+    : styles.likeCount;
 
   return (
     <div className="container">
@@ -118,7 +118,7 @@ export default function ArticlePage() {
 
             <button
               disabled={!token}
-              className={renderClass(article.favorited)}
+              className={likeClassName}
               onClick={handleLike}
             >
               {likes}
