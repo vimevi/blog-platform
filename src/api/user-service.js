@@ -33,6 +33,9 @@ class userService {
 
   async login(credentials) {
     const data = await this.performRequest("POST", "users/login", credentials);
+    if (JSON.stringify(data.user)) {
+      localStorage.setItem("user", JSON.stringify(data));
+    }
     return data;
   }
 

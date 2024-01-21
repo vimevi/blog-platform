@@ -1,15 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
 import instanceUserService from "../../api/user-service";
+
+const storedUser = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   isLoggedIn: false,
   loading: true,
   error: null,
-  email: null,
-  token: null,
-  username: null,
-  image: null,
+  email: storedUser?.user.email || null,
+  token: storedUser?.user.token || null,
+  username: storedUser?.user.username || null,
+  image: storedUser?.user.image || null,
   loginStatus: null,
   registerStatus: null,
   reloading: false,

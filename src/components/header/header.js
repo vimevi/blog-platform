@@ -14,6 +14,7 @@ export default function Header() {
 
   const handleLogout = () => {
     dispatch(remove());
+    localStorage.removeItem("user");
     message.info("You are logged out");
     navigate("articles");
   };
@@ -32,7 +33,7 @@ export default function Header() {
             <SuccessButton>Create article</SuccessButton>
           </NavLink>
           <NavLink className={style.profile} to="profile">
-            <span>{username || "Profile name"}</span>
+            <span>{username}</span>
             {renderProfileImage(image, style, avatar)}
           </NavLink>
           <button onClick={() => handleLogout()} className={style.logout}>
