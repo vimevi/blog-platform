@@ -1,3 +1,3 @@
-import ArticleForm from './article-form';
+import ArticleForm from "./article-form";
 
 export default ArticleForm;

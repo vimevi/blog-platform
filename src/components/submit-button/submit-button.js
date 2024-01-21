@@ -1,12 +1,27 @@
-import styles from './submit-button.module.scss';
+import styles from "./submit-button.module.scss";
+import PropTypes from "prop-types";
 
-export default function SubmitButton({ value, password, email, onRegister, username }) {
-	return (
-		<input
-			onSubmit={() => onRegister(email, password, username)}
-			className={styles.submit}
-			type="submit"
-			value={value}
-		/>
-	);
+export default function SubmitButton({
+  value,
+  password,
+  email,
+  onRegister,
+  username,
+}) {
+  return (
+    <input
+      onSubmit={() => onRegister(email, password, username)}
+      className={styles.submit}
+      type="submit"
+      value={value}
+    />
+  );
 }
+
+SubmitButton.propTypes = {
+  value: PropTypes.string,
+  password: PropTypes.string,
+  email: PropTypes.string,
+  onRegister: PropTypes.func,
+  username: PropTypes.string,
+};

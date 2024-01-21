@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import { NavLink } from "react-router-dom";
 import * as utils from "../../utils/general-utils/utils";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import {
   articleLike,
@@ -18,7 +19,6 @@ export default function ArticleItem({
   username,
   createdAt,
   image,
-  isLoggedIn,
   favorited,
   slug,
 }) {
@@ -96,3 +96,15 @@ export default function ArticleItem({
     </li>
   );
 }
+
+ArticleItem.propTypes = {
+  title: PropTypes.string,
+  favoritesCount: PropTypes.number,
+  tagList: PropTypes.array,
+  description: PropTypes.string,
+  username: PropTypes.string,
+  createdAt: PropTypes.any,
+  image: PropTypes.string,
+  favorited: PropTypes.bool,
+  slug: PropTypes.string,
+};
