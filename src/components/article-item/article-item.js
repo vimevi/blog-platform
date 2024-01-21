@@ -1,68 +1,98 @@
-import { useState } from 'react';
-import styles from './article-item.module.scss';
-import { format, parseISO } from 'date-fns';
-import { NavLink } from 'react-router-dom';
-import * as utils from '../../utils/utils';
+import { useState } from "react";
+import styles from "./article-item.module.scss";
+import { format, parseISO } from "date-fns";
+import { NavLink } from "react-router-dom";
+import * as utils from "../../utils/general-utils/utils";
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  articleLike,
+  articleDislike,
+} from "../../redux/slices/article-control-slice";
 
 export default function ArticleItem({
-	title,
-	likeCount,
-	tags,
-	desc,
-	author,
-	date,
-	avatar,
-	isLoggedIn,
-	slug,
+  title,
+  favoritesCount,
+  tagList,
+  description,
+  username,
+  createdAt,
+  image,
+  isLoggedIn,
+  favorited,
+  slug,
 }) {
-	const [like, setLike] = useState(false);
-	const [likes, setLikeCount] = useState(likeCount);
+  const [like, setLike] = useState(favorited);
+  const [likes, setLikeCount] = useState(favoritesCount);
 
-	const parsedDate = parseISO(date);
-	const formattedDate = format(parsedDate, 'MMMM d, yyyy, p');
-	//
-	function handleLike() {
-		setLike(!like);
-		setLikeCount((prevLikes) => (like ? prevLikes - 1 : prevLikes + 1));
-	}
-	const likeClassName = like
-		? `${styles.likeCount} ${styles.liked}`
-		: styles.likeCount;
+  const { token } = useSelector((store) => store.user);
 
-	return (
-		<li className={styles.ArticleItem}>
-			<div>
-				<div className={styles.firstLine}>
-					<NavLink to={`/articles/${slug}`}>
-						<h5 className={styles.title}>{utils.truncateTextAtWord(title, 64)}</h5>
-					</NavLink>
+  const dispatch = useDispatch();
+  const handleLike = () => {
+    if (!token) {
+      return;
+    }
 
-					<button
-						disabled={!isLoggedIn}
-						className={likeClassName}
-						onClick={handleLike}
-					>
-						{likes}
-					</button>
-				</div>
-				<div className={styles.tags}>
-					{tags.map((tag, index) => (
-						<span key={index} className={styles.tag}>
-							{utils.truncateTextAtWord(tag, 40)}
-						</span>
-					))}
-				</div>
-				<p className={styles.desc}>{utils.truncateTextAtWord(desc, 100)}</p>
-			</div>
-			<div className={styles.authorBlock}>
-				<div className={styles.authorInfo}>
-					<h6 className={styles.author}>{author}</h6>
-					<span className={styles.date}>{formattedDate}</span>
-				</div>
-				<div className={styles.avatar}>
-					<img className={styles.avatarImg} src={avatar} alt="avatar" />
-				</div>
-			</div>
-		</li>
-	);
+    try {
+      if (!like) {
+        dispatch(articleLike({ token, slug }));
+        setLikeCount((prevLikes) => prevLikes + 1);
+      } else {
+        dispatch(articleDislike({ token, slug }));
+        setLikeCount((prevLikes) => prevLikes - 1);
+      }
+
+      setLike(!like);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  const parsedDate = parseISO(createdAt);
+  const formattedDate = format(parsedDate, "MMMM d, yyyy, p");
+
+  const likeClassName = like
+    ? `${styles.likeCount} ${styles.liked}`
+    : styles.likeCount;
+
+  return (
+    <li className={styles.ArticleItem}>
+      <div>
+        <div className={styles.firstLine}>
+          <NavLink to={`/articles/${slug}`}>
+            <h5 className={styles.title}>
+              {utils.truncateTextAtWord(title, 100)}
+            </h5>
+          </NavLink>
+
+          <button
+            disabled={!token}
+            className={likeClassName}
+            onClick={handleLike}
+          >
+            {likes}
+          </button>
+        </div>
+        <div className={styles.tags}>
+          {tagList.map((tag, index) => (
+            <span key={index} className={styles.tag}>
+              {utils.truncateTextAtWord(tag, 40)}
+            </span>
+          ))}
+        </div>
+        <p className={styles.desc}>
+          {utils.truncateTextAtWord(description, 240)}
+        </p>
+      </div>
+      <div className={styles.authorBlock}>
+        <div className={styles.authorInfo}>
+          <h6 className={styles.author}>{username}</h6>
+          <span className={styles.date}>{formattedDate}</span>
+        </div>
+        <div className={styles.avatar}>
+          <img className={styles.avatarImg} src={image} alt="avatar" />
+        </div>
+      </div>
+    </li>
+  );
 }

@@ -4,20 +4,21 @@ import instanceArticleService from '../../api/article-service';
 const initialState = {
 	currentPage: 1,
 	loading: true,
-	status: null, // надобность данного поля под вопросом
+	status: null,
 	articles: [],
 	article: {},
 	error: null,
 	articlesCount: 0,
 	isOpenFull: false,
+	openFullstatus: 'idle',
 	slug: '',
 };
 
 export const fetchArticles = createAsyncThunk(
 	'article/fetchArticles',
-	async function (page, { rejectWithValue }) {
+	async function ({ page, token }, { rejectWithValue }) {
 		try {
-			return await instanceArticleService.getArticles(page);
+			return await instanceArticleService.getArticles(page, token);
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -26,9 +27,9 @@ export const fetchArticles = createAsyncThunk(
 
 export const fetchFullArticle = createAsyncThunk(
 	'article/fetchFullArticle',
-	async function (id, { rejectWithValue }) {
+	async function (slug, { rejectWithValue }) {
 		try {
-			return await instanceArticleService.getArticlePage(id);
+			return await instanceArticleService.getArticlePage(slug);
 		} catch (e) {
 			return rejectWithValue(e.message);
 		}
@@ -42,8 +43,6 @@ const articleSlice = createSlice({
 		changePage(state, action) {
 			state.currentPage = action.payload;
 		},
-		// create(state, action) {},
-		// remove(state, action) {},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -65,18 +64,17 @@ const articleSlice = createSlice({
 				state.error = action.payload;
 			})
 			.addCase(fetchFullArticle.fulfilled, (state, action) => {
-				state.status = 'succeeded';
+				state.openFullstatus = 'succeeded';
 				state.loading = false;
-				state.article = action.payload;
+				state.article = action.payload.article;
 			})
 			.addCase(fetchFullArticle.pending, (state, action) => {
-				state.status = null;
+				state.openFullstatus = null;
 				state.loading = true;
-				// state.article = {};
-				// localStorage.setItem('article', JSON.stringify(action.payload));
+				state.article = {};
 			})
 			.addCase(fetchFullArticle.rejected, (state, action) => {
-				state.status = 'rejected';
+				state.openFullstatus = 'rejected';
 				state.loading = false;
 				state.error = action.payload;
 			});

@@ -6,9 +6,11 @@ import { Pagination, Alert } from 'antd';
 import ArticleItem from '../article-item/article-item';
 import defaultAvatar from '../../assets/images/avatar.png';
 import { useDispatch, useSelector } from 'react-redux';
+import { resetStatus } from '../../redux/slices/article-control-slice';
 
-import styles from './article-list.module.scss';
+import './article-list.module.scss';
 import Loading from '../loading';
+import { clearRegisterData } from '../../redux/slices/user-slice';
 
 export default function ArticleList() {
 	const dispatch = useDispatch();
@@ -16,10 +18,18 @@ export default function ArticleList() {
 	const { articles, articlesCount, error, currentPage, loading } = useSelector(
 		(state) => state.article
 	);
+	const { token } = useSelector((store) => store.user);
 	useEffect(() => {
-		dispatch(fetchArticles(currentPage));
-	}, [dispatch, currentPage]);
-	const { isLoggedIn } = useSelector((state) => state.user);
+		dispatch(clearRegisterData());
+		dispatch(resetStatus());
+		if (token) {
+			console.log('авторизирован');
+			dispatch(fetchArticles({ page: currentPage, token }));
+		} else {
+			console.log('Не авторизирован');
+			dispatch(fetchArticles({ page: currentPage }));
+		}
+	}, [dispatch, currentPage, token]);
 
 	const handlePageChange = async (pageNumber) => {
 		dispatch(changePage(pageNumber));
@@ -41,16 +51,16 @@ export default function ArticleList() {
 						articles.map((article) => (
 							<ArticleItem
 								key={article.slug}
-								author={article.author.username}
-								avatar={article.author.image || defaultAvatar}
-								date={article.createdAt}
+								username={article.author.username}
+								image={article.author.image || defaultAvatar}
+								createdAt={article.createdAt}
 								title={article.title}
-								likeCount={article.favoritesCount}
-								tags={article.tagList}
-								desc={article.description}
-								text={article.body}
-								isLoggedIn={isLoggedIn}
+								favoritesCount={article.favoritesCount}
+								tagList={article.tagList}
+								description={article.description}
+								text={article.text}
 								slug={article.slug}
+								favorited={article.favorited}
 							/>
 						))}
 				</ul>

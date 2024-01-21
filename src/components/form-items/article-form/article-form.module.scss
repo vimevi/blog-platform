@@ -2,13 +2,6 @@ form {
 	font-family: 'Roboto', sans-serif;
 }
 
-// input:not([type='submit']) {
-// 	input:not([type='submit']) {
-// 		padding: 8px;
-// 		border: 1px solid #ccc;
-// 	}
-// }
-
 .title {
 	font-weight: 500;
 	font-size: 20px;
@@ -39,6 +32,7 @@ form {
 	&::placeholder {
 		margin-bottom: auto;
 	}
+	font-family: 'Inter', sans-serif;
 }
 .tagTitle {
 	margin-bottom: 4px;

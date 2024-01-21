@@ -1,26 +1,46 @@
 class userService {
 	BASE_URL = 'https://blog.kata.academy/api/';
 
-	async registerAccount(credentials) {
-		const response = await fetch(this.BASE_URL + '/users/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
+	async performRequest(method, endpoint, credentials, token) {
+		const url = this.BASE_URL + endpoint;
+
+		const headers = {
+			'Content-Type': 'application/json',
+		};
+
+		if (token) {
+			headers.Authorization = `Token ${token}`;
+		}
+
+		const response = await fetch(url, {
+			method: method,
+			headers: headers,
 			body: JSON.stringify({ user: credentials }),
 		});
+
 		if (!response.ok) {
-			throw new Error('Server Error occured!');
+			throw new Error('Username or email is already taken by someone!');
 		}
+
 		const data = await response.json();
-		console.log(data);
 		return data;
 	}
-	login() {}
-	editProfile() {}
-	logout() {}
+
+	async registerAccount(credentials) {
+		const data = await this.performRequest('POST', 'users', credentials);
+		return data;
+	}
+
+	async login(credentials) {
+		const data = await this.performRequest('POST', 'users/login', credentials);
+		return data;
+	}
+
+	async editProfile(credentials, token) {
+		return this.performRequest('PUT', 'user', credentials, token);
+	}
 }
 
-const instanceUserServiceService = new userService();
+const instanceUserService = new userService();
 
-export default instanceUserServiceService;
+export default instanceUserService;
