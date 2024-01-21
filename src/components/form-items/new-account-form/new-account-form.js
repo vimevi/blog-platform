@@ -8,8 +8,8 @@ import {
 import { handleRegister as handleRegisterUtil } from "../../../utils/handle-submits/handle-submits";
 import { useForm } from "react-hook-form";
 import { message } from "antd";
-import styles from "../general-form.module.scss";
 import SubmitButton from "../../submit-button";
+import styles from "../general-form.module.scss";
 
 export default function NewAccountForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);

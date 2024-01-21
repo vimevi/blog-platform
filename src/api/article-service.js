@@ -28,7 +28,6 @@ class ArticleService {
     }
 
     const data = await response.json(); // await here
-    console.log("data in service", data);
     return data;
   }
 
@@ -45,7 +44,6 @@ class ArticleService {
 
   async getArticlePage(slug) {
     const url = `articles/${slug}`;
-    console.log("slug", slug);
     return this.performRequest(url, "GET");
   }
 
@@ -56,13 +54,11 @@ class ArticleService {
         tagList: tags,
       },
     });
-    console.log(data);
     return data;
   }
 
   async editArticle(content, token, tags, slug) {
     const url = `articles/${slug}`;
-    console.log("content in edit by name", content);
     const data = this.performRequest(url, "PUT", token, {
       article: {
         ...content,

@@ -22,7 +22,6 @@ export const createUser = createAsyncThunk(
 
   async function (data, { rejectWithValue }) {
     try {
-      console.log("отработал");
       return await instanceUserService.registerAccount(data);
     } catch (e) {
       return rejectWithValue(e.message);

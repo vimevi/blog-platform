@@ -22,7 +22,6 @@ export const articleCreator = createAsyncThunk(
 export const articleEditor = createAsyncThunk(
   "articleControl/articleEditor",
   async function ({ data, token, tags, slug }, { rejectWithValue }) {
-    console.log(data);
     try {
       return await instanceArticleService.editArticle(data, token, tags, slug);
     } catch (e) {

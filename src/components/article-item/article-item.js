@@ -44,7 +44,7 @@ export default function ArticleItem({
 
       setLike(!like);
     } catch (error) {
-      console.error("Error:", error);
+      throw new Error(error);
     }
   };
 

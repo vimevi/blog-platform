@@ -1,15 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Header from "../header/header";
-import ArticleList from "../article-list/article-list";
+import Header from "../header";
+import ArticleList from "../article-list";
 import NewAccountForm from "../form-items/new-account-form";
-import "./app.module.scss";
 import EditProfileForm from "../form-items/edit-profile-form";
 import LoginForm from "../form-items/login-form";
 import ArticleForm from "../form-items/article-form";
-
-import ArticlePage from "../article-page/article-page";
+import ArticlePage from "../article-page";
 import PrivateRoutes from "../../utils/router/privateRouter";
+import "./app.module.scss";
 
 export default function App() {
   return (

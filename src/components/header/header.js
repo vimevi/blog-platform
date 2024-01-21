@@ -1,12 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import SuccessButton from "./success-button";
+import { useDispatch, useSelector } from "react-redux";
 
-import { renderProfileImage } from "../../utils/general-utils/utils";
 import avatar from "../../assets/images/avatar.png";
 import { remove } from "../../redux/slices/user-slice";
-import style from "./header.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 import { message } from "antd";
+import { renderProfileImage } from "../../utils/general-utils/utils";
+import SuccessButton from "./success-button";
+import style from "./header.module.scss";
 
 export default function Header() {
   const { username, image } = useSelector((store) => store.user);

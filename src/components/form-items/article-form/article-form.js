@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import styles from "./article-form.module.scss";
 import SubmitButton from "../../submit-button";
 import Tag from "./tag";
 import { useForm } from "react-hook-form";
@@ -10,6 +9,7 @@ import {
 } from "../../../redux/slices/article-control-slice";
 import { useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
+import styles from "./article-form.module.scss";
 
 export default function ArticleForm() {
   const { slug } = useParams();
@@ -81,7 +81,6 @@ export default function ArticleForm() {
             placeholder="Title"
             {...register("title", {
               required: "Title is require field!",
-
               maxLength: {
                 message: "Maximum length of username is 5000",
                 value: 5000,

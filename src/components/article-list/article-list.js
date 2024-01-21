@@ -2,15 +2,14 @@ import { useEffect } from "react";
 
 import { fetchArticles, changePage } from "../../redux/slices/article-slice";
 
-import { Pagination, Alert } from "antd";
-import ArticleItem from "../article-item/article-item";
 import defaultAvatar from "../../assets/images/avatar.png";
+import { Pagination, Alert } from "antd";
+import ArticleItem from "../article-item";
 import { useDispatch, useSelector } from "react-redux";
 import { resetStatus } from "../../redux/slices/article-control-slice";
-
-import "./article-list.module.scss";
 import Loading from "../loading";
 import { clearRegisterData } from "../../redux/slices/user-slice";
+import "./article-list.module.scss";
 
 export default function ArticleList() {
   const dispatch = useDispatch();
@@ -23,10 +22,8 @@ export default function ArticleList() {
     dispatch(clearRegisterData());
     dispatch(resetStatus());
     if (token) {
-      console.log("авторизирован");
       dispatch(fetchArticles({ page: currentPage, token }));
     } else {
-      console.log("Не авторизирован");
       dispatch(fetchArticles({ page: currentPage }));
     }
   }, [dispatch, currentPage, token]);

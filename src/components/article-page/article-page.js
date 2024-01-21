@@ -67,7 +67,7 @@ export default function ArticlePage() {
 
       setLike(!like);
     } catch (error) {
-      console.error("Error:", error);
+      throw new Error(error);
     }
   };
 

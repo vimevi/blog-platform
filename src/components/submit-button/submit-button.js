@@ -19,7 +19,7 @@ export default function SubmitButton({
 }
 
 SubmitButton.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.string.isRequired,
   password: PropTypes.string,
   email: PropTypes.string,
   onRegister: PropTypes.func,
