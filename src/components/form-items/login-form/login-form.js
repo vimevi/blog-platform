@@ -76,7 +76,7 @@ export default function LoginForm() {
         {errors?.password && (
           <div className="validation-warning">{errors.password.message}</div>
         )}
-        <SubmitButton value="Send" class={styles.sendBtn} />
+        <SubmitButton value="Login" class={styles.sendBtn} />
         <span className={styles.createProfileText}>
           Don&apos;t have an account?
           <NavLink to="/register"> {<span>Sign Up.</span>} </NavLink>

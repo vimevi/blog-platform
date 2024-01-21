@@ -149,7 +149,7 @@ export default function NewAccountForm() {
         {errors?.agree && (
           <div className="validation-warning">{errors.agree.message}</div>
         )}
-        <SubmitButton value="Register" class={styles.sendBtn} />
+        <SubmitButton value="Create" class={styles.sendBtn} />
       </form>
     </div>
   );
