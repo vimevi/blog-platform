@@ -67,7 +67,6 @@ const userSlice = createSlice({
     },
     clearRegisterData(state) {
       state.error = null;
-      state.loading = false;
       state.registerStatus = "idle";
       state.loginStatus = "idle";
       state.editProfileStatus = "idle";

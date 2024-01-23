@@ -76,8 +76,7 @@ export default function ArticlePage() {
     !article.title ||
     !article.createdAt ||
     !article.author ||
-    !article.tagList ||
-    !article.description
+    !article.tagList
   ) {
     return (
       <div>
