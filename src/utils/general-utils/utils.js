@@ -12,12 +12,31 @@ export function truncateTextAtWord(text, maxLength = 36) {
   }
 }
 export const renderProfileImage = (image, style, avatar) => {
-  if (typeof image === "string") {
-    return <img src={image} alt={style.avatar} className={style.avatar} />;
-  } else if (image && image.url) {
-    return <img src={image.url} alt={style.avatar} className={style.avatar} />;
+  const handleError = (event) => {
+    event.target.src = avatar;
+  };
+
+  if (typeof image === "string" && image.length > 0) {
+    return (
+      <img
+        src={image}
+        alt={style.avatar}
+        className={style.avatar}
+        onError={handleError}
+      />
+    );
+  } else if (image && image.url && image.url.length > 0) {
+    return (
+      <img
+        src={image.url}
+        alt={style.avatar}
+        className={style.avatar}
+        onError={handleError}
+      />
+    );
   } else {
-    return <img src={avatar} alt={style.avatar} className={style.avatar} />;
+    return (
+      <img src={avatar} alt="Avatar Placeholder" className={style.avatar} />
+    );
   }
 };
-// https://static.productionready.io/images/smiley-cyrus.jpg

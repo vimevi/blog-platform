@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useForm } from "react-hook-form";
 import { message } from "antd";
-import styles from "../general-form.module.scss";
 import { useEffect } from "react";
+import * as path from "../../../utils/router/paths";
 import SubmitButton from "../../submit-button";
+import styles from "../general-form.module.scss";
 
 export default function LoginForm() {
   const {
@@ -28,7 +29,7 @@ export default function LoginForm() {
   useEffect(() => {
     if (token) {
       message.success("You are logged into your account!");
-      navigate("/articles");
+      navigate(`/${path.articlesPath}`);
     } else {
       if (loginStatus === "failed") {
         message.error("Invalid authorization data");
@@ -79,7 +80,9 @@ export default function LoginForm() {
         <SubmitButton value="Login" class={styles.sendBtn} />
         <span className={styles.createProfileText}>
           Don&apos;t have an account?
-          <NavLink to="/register"> {<span>Sign Up.</span>} </NavLink>
+          <NavLink to={`/${path.registerPath}`}>
+            {<span> Sign Up.</span>}
+          </NavLink>
         </span>
       </form>
     </div>

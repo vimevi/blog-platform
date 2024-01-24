@@ -6,17 +6,17 @@ import { remove } from "../../redux/slices/user-slice";
 import { message } from "antd";
 import { renderProfileImage } from "../../utils/general-utils/utils";
 import SuccessButton from "./success-button";
+import * as path from "../../utils/router/paths";
 import style from "./header.module.scss";
 
 export default function Header() {
   const { username, image } = useSelector((store) => store.user);
   const navigate = useNavigate();
-
   const handleLogout = () => {
     dispatch(remove());
     localStorage.removeItem("user");
     message.info("You are logged out");
-    navigate("articles");
+    navigate(path.articlesPath);
   };
 
   const { token } = useSelector((store) => store.user);
@@ -29,12 +29,13 @@ export default function Header() {
 
       {token ? (
         <nav className={style.loggedInner}>
-          <NavLink to="new-article" tabIndex={-1}>
+          <NavLink to={path.newArticlePath} tabIndex={-1}>
             <SuccessButton>Create article</SuccessButton>
           </NavLink>
-          <NavLink className={style.profile} to="profile">
+          <NavLink className={style.profile} to={path.profilePath}>
             <span>{username}</span>
-            {renderProfileImage(image, style, avatar)}
+            {<img src={avatar} className={style.avatar}></img> &&
+              renderProfileImage(image, style, avatar)}
           </NavLink>
           <button onClick={() => handleLogout()} className={style.logout}>
             Log Out
@@ -42,10 +43,10 @@ export default function Header() {
         </nav>
       ) : (
         <nav className={style.unloggedInner}>
-          <NavLink tabIndex={-1} to="/login">
+          <NavLink tabIndex={-1} to={path.loginPath}>
             <button className={style.login}>Sign In</button>
           </NavLink>
-          <NavLink tabIndex={-1} to="/register">
+          <NavLink tabIndex={-1} to={path.registerPath}>
             <SuccessButton>Sign Up</SuccessButton>
           </NavLink>
         </nav>

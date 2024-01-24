@@ -8,6 +8,7 @@ import LoginForm from "../form-items/login-form";
 import ArticleForm from "../form-items/article-form";
 import ArticlePage from "../article-page";
 import PrivateRoutes from "../../utils/router/privateRouter";
+import * as path from "../../utils/router/paths";
 import "./app.module.scss";
 
 export default function App() {
@@ -17,15 +18,15 @@ export default function App() {
         <Header />
         <Routes>
           <Route path="/" element={<ArticleList />} />
-          <Route path="articles" element={<ArticleList />} />
-          <Route path="register" element={<NewAccountForm />} />
-          <Route path="login" element={<LoginForm />} />
+          <Route path={path.articlesPath} element={<ArticleList />} />
+          <Route path={path.registerPath} element={<NewAccountForm />} />
+          <Route path={path.loginPath} element={<LoginForm />} />
           <Route element={<PrivateRoutes />}>
-            <Route path="new-article" element={<ArticleForm />} />
-            <Route path="profile" element={<EditProfileForm />} />
-            <Route path="articles/:slug/edit" element={<ArticleForm />} />
+            <Route path={path.newArticlePath} element={<ArticleForm />} />
+            <Route path={path.profilePath} element={<EditProfileForm />} />
+            <Route path={path.editArticlePath} element={<ArticleForm />} />
           </Route>
-          <Route path="articles/:slug" element={<ArticlePage />} />
+          <Route path={path.articlePath} element={<ArticlePage />} />
           <Route
             path="*"
             element={<h3 className="spin">Nothing was found: 404!</h3>}

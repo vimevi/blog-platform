@@ -1,4 +1,3 @@
-import styles from "../general-form.module.scss";
 import SubmitButton from "../../submit-button";
 import {
   editProfile,
@@ -9,6 +8,8 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import * as path from "../../../utils/router/paths";
+import styles from "../general-form.module.scss";
 
 export default function EditProfileForm() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export default function EditProfileForm() {
   useEffect(() => {
     if (editProfileStatus === "succeeded") {
       message.success("Your profile was updated!");
-      navigate("/articles");
+      navigate(`/${path.articlesPath}`);
     }
   }, [editProfileStatus, navigate]);
 
@@ -104,7 +105,7 @@ export default function EditProfileForm() {
               required: "Please confirm your password or enter new here!",
               minLength: {
                 value: 6,
-                message: "Mininum length of password is 6 symbols",
+                message: "Minimum length of password is 6 symbols",
               },
               maxLength: {
                 value: 40,

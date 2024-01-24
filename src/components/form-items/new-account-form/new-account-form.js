@@ -9,6 +9,7 @@ import { handleRegister as handleRegisterUtil } from "../../../utils/handle-subm
 import { useForm } from "react-hook-form";
 import { message } from "antd";
 import SubmitButton from "../../submit-button";
+import * as path from "../../../utils/router/paths";
 import styles from "../general-form.module.scss";
 
 export default function NewAccountForm() {
@@ -27,7 +28,7 @@ export default function NewAccountForm() {
   const toLogin = useCallback(() => {
     if (registerStatus === "succeeded") {
       message.success(`Your profile was successfully created! Welcome`);
-      navigate("/login");
+      navigate(`/${path.loginPath}`);
     }
   }, [registerStatus, navigate]);
 
@@ -44,7 +45,7 @@ export default function NewAccountForm() {
 
   useEffect(() => {
     if (token) {
-      navigate("/articles");
+      navigate(`/${path.articlesPath}`);
     }
     if (error) {
       message.error(error);

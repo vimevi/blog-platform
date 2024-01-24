@@ -5,7 +5,7 @@ export default function Tag({ tag, onDelete }) {
   return (
     <div className={styles.divTag}>
       <div className={styles.tag}>{tag}</div>
-      <button className={styles.deleteTag} onClick={onDelete}>
+      <button className={styles.deleteTag} onClick={onDelete} type="button">
         Delete
       </button>
     </div>

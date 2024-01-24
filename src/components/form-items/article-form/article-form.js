@@ -9,6 +9,7 @@ import {
 } from "../../../redux/slices/article-control-slice";
 import { useNavigate, useParams } from "react-router-dom";
 import { message } from "antd";
+import * as path from "../../../utils/router/paths";
 import styles from "./article-form.module.scss";
 
 export default function ArticleForm() {
@@ -31,32 +32,38 @@ export default function ArticleForm() {
     register,
     formState: { errors },
   } = useForm();
-
   const handleCreateArticle = (data) => {
     if (isEditing) {
       dispatch(articleEditor({ token, data, tags, slug }));
-    } else dispatch(articleCreator({ token, data, tags }));
+    } else {
+      dispatch(articleCreator({ token, data, tags }));
+    }
   };
+
   useEffect(() => {
     if (isEditing && article) {
       setValue("title", article.title);
       setValue("description", article.description);
       setValue("body", article.body);
+
+      if (article.tagList) {
+        setTags(article.tagList);
+      }
     }
-  }, [isEditing, setValue, article]);
+  }, [setValue, article]);
 
   useEffect(() => {
     if (status === "succeeded") {
       message.success(
         `You have ${isEditing ? "updated" : "posted"} an article!`,
       );
-      navigate("/articles");
+      navigate(`/${path.articlesPath}`);
     }
   }, [status, navigate, isEditing]);
 
   const handleAddTag = () => {
     if (newTag.trim() !== "") {
-      setTags([...tags, newTag.trim()]);
+      setTags((prevTags) => [...prevTags, newTag.trim()]);
       setNewTag("");
     }
   };

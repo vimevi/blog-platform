@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "../article-item/article-item.module.scss";
 
 import { fetchFullArticle } from "../../redux/slices/article-slice";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
@@ -13,6 +12,8 @@ import {
 } from "../../redux/slices/article-control-slice";
 import { message, Popconfirm } from "antd";
 import Loading from "../loading";
+import * as path from "../../utils/router/paths";
+import styles from "../article-item/article-item.module.scss";
 
 export default function ArticlePage() {
   const { slug } = useParams();
@@ -44,7 +45,7 @@ export default function ArticlePage() {
   }, [article]);
 
   useEffect(() => {
-    if (article && article.author && article.author.username === username) {
+    if (article?.author?.username === username) {
       setIsMyArticle(true);
     } else {
       setIsMyArticle(false);
@@ -97,7 +98,7 @@ export default function ArticlePage() {
       dispatch(articleDeleter({ token, slug }));
       // 0.5 сек делей для прогрузки нового массива articles
       message.loading("Article deleted", [1]);
-      setTimeout(() => navigate("/articles"), 500);
+      setTimeout(() => navigate("/" + path.articlesPath), 500);
       setIsMyArticle(false);
     },
     onCancel() {
