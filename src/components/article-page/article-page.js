@@ -12,6 +12,7 @@ import {
 } from "../../redux/slices/article-control-slice";
 import { message, Popconfirm } from "antd";
 import Loading from "../loading";
+import * as utils from "../../utils/general-utils/utils";
 import * as path from "../../utils/router/paths";
 import styles from "../article-item/article-item.module.scss";
 
@@ -144,11 +145,10 @@ export default function ArticlePage() {
             <span className={styles.date}>{formattedDate}</span>
           </div>
           <div className={styles.avatar}>
-            <img
-              className={styles.avatarImg}
-              src={article.author.image}
-              alt="avatar"
-            />
+            {utils.renderProfileImage(
+              article.author.image,
+              `${styles.avatarImg}`,
+            )}
             {isMyArticle && (
               <div className={styles.buttonBlock}>
                 <Popconfirm placement="bottom" {...confirmConfig}>

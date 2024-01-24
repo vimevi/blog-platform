@@ -35,7 +35,7 @@ export default function Header() {
           <NavLink className={style.profile} to={path.profilePath}>
             <span>{username}</span>
             {<img src={avatar} className={style.avatar}></img> &&
-              renderProfileImage(image, style, avatar)}
+              renderProfileImage(image, `${style.avatar}`)}
           </NavLink>
           <button onClick={() => handleLogout()} className={style.logout}>
             Log Out

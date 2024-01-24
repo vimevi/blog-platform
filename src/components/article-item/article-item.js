@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import * as utils from "../../utils/general-utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
+// import avatar from "../../assets/images/avatar.png";
 
 import {
   articleLike,
@@ -90,7 +91,7 @@ export default function ArticleItem({
           <span className={styles.date}>{formattedDate}</span>
         </div>
         <div className={styles.avatar}>
-          <img className={styles.avatarImg} src={image} alt="avatar" />
+          {utils.renderProfileImage(image, `${styles.avatarImg}`)}
         </div>
       </div>
     </li>

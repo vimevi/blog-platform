@@ -1,3 +1,5 @@
+import avatar from "../../assets/images/avatar.png";
+
 export function truncateTextAtWord(text, maxLength = 36) {
   if (text?.length <= maxLength) {
     return text;
@@ -11,32 +13,27 @@ export function truncateTextAtWord(text, maxLength = 36) {
     return truncatedText + "...";
   }
 }
-export const renderProfileImage = (image, style, avatar) => {
+export const renderProfileImage = (image, style) => {
   const handleError = (event) => {
     event.target.src = avatar;
   };
 
   if (typeof image === "string" && image.length > 0) {
     return (
-      <img
-        src={image}
-        alt={style.avatar}
-        className={style.avatar}
-        onError={handleError}
-      />
+      <img src={image} alt={style} className={style} onError={handleError} />
     );
   } else if (image && image.url && image.url.length > 0) {
     return (
       <img
         src={image.url}
-        alt={style.avatar}
-        className={style.avatar}
+        alt={avatar}
+        className={style}
         onError={handleError}
       />
     );
   } else {
     return (
-      <img src={avatar} alt="Avatar Placeholder" className={style.avatar} />
+      <img src={avatar} alt="Avatar Placeholder" className={style.className} />
     );
   }
 };
