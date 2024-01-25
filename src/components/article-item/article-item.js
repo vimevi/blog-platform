@@ -75,11 +75,12 @@ export default function ArticleItem({
           </button>
         </div>
         <div className={styles.tags}>
-          {tagList.map((tag, index) => (
+          {tagList.slice(0, 10).map((tag, index) => (
             <span key={index} className={styles.tag}>
               {utils.truncateTextAtWord(tag, 40)}
             </span>
-          ))}
+          ))}{" "}
+          {tagList.length > 10 && <span>...</span>}
         </div>
         <p className={styles.desc}>
           {utils.truncateTextAtWord(description, 240)}
