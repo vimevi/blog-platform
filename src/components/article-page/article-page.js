@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchFullArticle } from "../../redux/slices/article-slice";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { format, parseISO } from "date-fns";
+import { ru } from "date-fns/locale";
 import { articleDeleter } from "../../redux/slices/article-control-slice";
 import Markdown from "markdown-to-jsx";
 import {
@@ -88,22 +89,24 @@ export default function ArticlePage() {
   }
 
   const parsedDate = parseISO(article.createdAt);
-  const formattedDate = format(parsedDate, "MMMM d, yyyy, p");
+  const formattedDate = format(parsedDate, "d MMMM yyyy, p", {
+    locale: ru,
+  });
 
   const confirmConfig = {
-    title: "Are you sure you want to delete this article?",
-    okText: "Yes",
+    title: "Вы уверены, что хотите удалить эту статью?",
+    okText: "Да",
     okType: "danger",
-    cancelText: "No",
+    cancelText: "Нет",
     onConfirm() {
       dispatch(articleDeleter({ token, slug }));
       // 0.5 сек делей для прогрузки нового массива articles
-      message.loading("Article deleted", [1]);
+      message.loading("Статья удалена", [1]);
       setTimeout(() => navigate("/" + path.articlesPath), 500);
       setIsMyArticle(false);
     },
     onCancel() {
-      message.info("Deletion cancelled");
+      message.info("Удаление отменено");
     },
   };
   const likeClassName = like
@@ -152,10 +155,10 @@ export default function ArticlePage() {
             {isMyArticle && (
               <div className={styles.buttonBlock}>
                 <Popconfirm placement="bottom" {...confirmConfig}>
-                  <button className={styles.delete}>Delete</button>
+                  <button className={styles.delete}>Удалить</button>
                 </Popconfirm>
                 <NavLink to={`/articles/${slug}/edit`} tabIndex={-1}>
-                  <button className={styles.edit}>Edit</button>
+                  <button className={styles.edit}>Изменить</button>
                 </NavLink>
               </div>
             )}

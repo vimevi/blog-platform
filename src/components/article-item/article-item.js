@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styles from "./article-item.module.scss";
 import { format, parseISO } from "date-fns";
+import { ru } from "date-fns/locale";
 import { NavLink } from "react-router-dom";
 import * as utils from "../../utils/general-utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
-// import avatar from "../../assets/images/avatar.png";
 
 import {
   articleLike,
@@ -50,7 +50,9 @@ export default function ArticleItem({
   };
 
   const parsedDate = parseISO(createdAt);
-  const formattedDate = format(parsedDate, "MMMM d, yyyy, p");
+  const formattedDate = format(parsedDate, "d MMMM yyyy, p", {
+    locale: ru,
+  });
 
   const likeClassName = like
     ? `${styles.likeCount} ${styles.liked}`

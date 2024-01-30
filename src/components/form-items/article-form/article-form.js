@@ -54,9 +54,7 @@ export default function ArticleForm() {
 
   useEffect(() => {
     if (status === "succeeded") {
-      message.success(
-        `You have ${isEditing ? "updated" : "posted"} an article!`,
-      );
+      message.success(`Вы ${isEditing ? "обновили" : "опубликовали"} статью!`);
       navigate(`/${path.articlesPath}`);
     }
   }, [status, navigate, isEditing]);
@@ -78,18 +76,18 @@ export default function ArticleForm() {
     <div className="container">
       <form title="article" onSubmit={handleSubmit(handleCreateArticle)}>
         <h4 className={styles.title}>
-          {isEditing ? "Edit article" : "Create new article"}
+          {isEditing ? "Редактирование статьи" : "Создавать новую статью"}
         </h4>
         <label>
-          <span>Title</span>
+          <span>Заголовок</span>
           <input
             className={styles.articleTitle}
             type="text"
-            placeholder="Title"
+            placeholder="Заголовок"
             {...register("title", {
-              required: "Title is require field!",
+              required: "Заголовок обязателен!",
               maxLength: {
-                message: "Maximum length of username is 5000",
+                message: "Максимальное количество символом 5000!",
                 value: 5000,
               },
             })}
@@ -99,15 +97,15 @@ export default function ArticleForm() {
           <div className="validation-warning">{errors.description.message}</div>
         )}
         <label>
-          <span>Short description</span>
+          <span>Короткое описание</span>
           <input
             className={styles.desc}
             type="text"
-            placeholder="Short description"
+            placeholder="Короткое описание"
             {...register("description", {
-              required: "Short description is require field!",
+              required: "Короткое описание обязательное поле!",
               maxLength: {
-                message: "Maximum length of description is 200",
+                message: "Максимальная длина описания 200 символов",
                 value: 200,
               },
             })}
@@ -121,11 +119,11 @@ export default function ArticleForm() {
           <textarea
             className={styles.text}
             type="text"
-            placeholder="Text"
+            placeholder="Текст"
             {...register("body", {
-              required: "Body is require field!",
+              required: "Текст обязательное поле!",
               maxLength: {
-                message: "Maximum length of body is 5000",
+                message: "Максимальная длина текста в статье 5000 символов",
                 value: 5000,
               },
             })}
@@ -142,7 +140,7 @@ export default function ArticleForm() {
           <input
             className={styles.tagInput}
             type="text"
-            placeholder="Tag"
+            placeholder="Тег"
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
           />
@@ -151,12 +149,12 @@ export default function ArticleForm() {
             type="button"
             onClick={handleAddTag}
           >
-            Add tag
+            Добавить
           </button>
         </div>
         <div className={styles.submitContainer}>
           <SubmitButton
-            value={!isEditing ? "Send" : "Save"}
+            value={!isEditing ? "Поделиться" : "Сохранить"}
             class={styles.sendBtn}
           />
         </div>

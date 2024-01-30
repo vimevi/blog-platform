@@ -37,7 +37,7 @@ export default function EditProfileForm() {
 
   useEffect(() => {
     if (editProfileStatus === "succeeded") {
-      message.success("Your profile was updated!");
+      message.success("Профиль обновлён!");
       navigate(`/${path.articlesPath}`);
     }
   }, [editProfileStatus, navigate]);
@@ -54,40 +54,40 @@ export default function EditProfileForm() {
       <form onSubmit={handleSubmit(handleEditProfile)}>
         <h4 className={styles.title}>Edit Profile</h4>
         <label>
-          <span>Username</span>
+          <span>Имя пользователя</span>
           <input
             type="text"
             name="username"
-            placeholder="Username"
+            placeholder="Имя пользователя"
             {...register("username", {
-              required: "Username is require field!",
+              required: "Имя пользователя - обязательное поле!",
               minLength: {
-                message: "Minimum length of username is 3",
+                message: "Минимальное длина имени пользователя - 3 символа",
                 value: 3,
               },
               pattern: {
                 value: /^[a-zA-Z0-9]+$/,
                 message:
-                  "Username should only contain Latin letters and numbers with no spacing!",
+                  "Имя пользователя должно содержать только латинские буквы и не содержать пробелов!",
               },
               maxLength: {
-                message: "Maximum length of username is 20",
+                message: "Максимальная длина имени пользователя - 20",
                 value: 20,
               },
             })}
           />
         </label>
         <label>
-          <span>Email address</span>
+          <span>Email адрес</span>
           <input
             type="text"
             name="email"
-            placeholder="Email address"
+            placeholder="Email адрес"
             {...register("email", {
-              required: "Email is require field!",
+              required: "Email является обязательным полем!",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter valid email!",
+                message: "Пожалуйста, введите действительный email!",
               },
             })}
           />
@@ -96,20 +96,21 @@ export default function EditProfileForm() {
           )}
         </label>
         <label>
-          <span>New password</span>
+          <span>Новый пароль</span>
           <input
             type="password"
             name="confirmPassword"
             placeholder="Password"
             {...register("password", {
-              required: "Please confirm your password or enter new here!",
+              required:
+                "Пожалуйста, подтвердите свой пароль или введите новый!",
               minLength: {
                 value: 6,
-                message: "Minimum length of password is 6 symbols",
+                message: "Минимальная длина пароля - 6 символов",
               },
               maxLength: {
                 value: 40,
-                message: "Maximum length of this field is 40 characters",
+                message: "Максимальная длина пароля - 40 символов",
               },
             })}
           />
@@ -118,14 +119,14 @@ export default function EditProfileForm() {
           )}
         </label>
         <label>
-          <span>Avatar image (url)</span>
+          <span>Главное фото (url)</span>
           <input
             type="url"
             placeholder="Avatar image"
             {...register("image", {
               pattern: {
                 value: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/,
-                message: "Enter a valid URL!",
+                message: "Введите действительный URL-адрес!",
               },
             })}
           />

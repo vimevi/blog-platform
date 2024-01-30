@@ -27,7 +27,7 @@ export default function NewAccountForm() {
 
   const toLogin = useCallback(() => {
     if (registerStatus === "succeeded") {
-      message.success(`Your profile was successfully created! Welcome`);
+      message.success(`Ваш профиль успешно создан! Добро пожаловать!`);
       navigate(`/${path.loginPath}`);
     }
   }, [registerStatus, navigate]);
@@ -59,24 +59,24 @@ export default function NewAccountForm() {
       <form title="register" onSubmit={handleSubmit(handleRegister)}>
         <h4 className={styles.title}>Create new account</h4>
         <label>
-          <span>Username</span>
+          <span>Имя пользователя</span>
           <input
             type="text"
             name="username"
-            placeholder="Username"
+            placeholder="Имя пользователя"
             {...register("username", {
-              required: "Username is require field!",
+              required: "Имя пользователя - обязательное поле!",
               minLength: {
-                message: "Minimum length of username is 3",
+                message: "Минимальная длина имени пользователя - 3",
                 value: 3,
               },
               pattern: {
                 value: /^[a-zA-Z0-9]+$/,
                 message:
-                  "Username should only contain Latin letters and numbers with no spacing!",
+                  "Имя пользователя должно содержать только латинские буквы и цифры без пробелов!",
               },
               maxLength: {
-                message: "Maximum length of username is 20",
+                message: "Максимальная длина имени пользователя - 20",
                 value: 20,
               },
             })}
@@ -86,16 +86,17 @@ export default function NewAccountForm() {
           )}
         </label>
         <label>
-          <span>Email address</span>
+          <span>Email</span>
           <input
             type="text"
             name="email"
-            placeholder="Email address"
+            placeholder="Email"
             {...register("email", {
-              required: "Email is require field!",
+              required: "Адрес электронной почты - обязательное поле!",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter valid email!",
+                message:
+                  "Пожалуйста, введите действительный адрес электронной почты!",
               },
             })}
           />
@@ -113,11 +114,11 @@ export default function NewAccountForm() {
               required: "Please enter password here!",
               minLength: {
                 value: 6,
-                message: "Mininum length of password is 6 symbols",
+                message: "Минимальная длина пароля - 6 символов",
               },
               maxLength: {
                 value: 40,
-                message: "Maximum length of this field is 40 characters",
+                message: "Максимальная длина пароль составляет 40 символов",
               },
             })}
           />
@@ -126,12 +127,12 @@ export default function NewAccountForm() {
           )}
         </label>
         <label>
-          <span>Repeat Password</span>
+          <span>Повторите пароль</span>
           <input
             type="password"
-            placeholder="Repeat Password"
+            placeholder="Повторите пароль"
             {...register("repeatPassword", {
-              required: "Please confirm your password!",
+              required: "Пожалуйста, подтвердите свой пароль!",
             })}
           />
           {errors?.repeatPassword && (
@@ -144,11 +145,10 @@ export default function NewAccountForm() {
           <input
             type="checkbox"
             {...register("agree", {
-              required:
-                "Agreement for the processing of personal data is required",
+              required: "Требуется согласие на обработку персональных данных",
             })}
           />
-          I agree to the processing of my personal information
+          Я согласен на обработку моей личной информации
         </label>
         {errors?.agree && (
           <div className="validation-warning">{errors.agree.message}</div>

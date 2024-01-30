@@ -28,11 +28,11 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (token) {
-      message.success("You are logged into your account!");
+      message.success("Вы вошли в свой аккаунт!");
       navigate(`/${path.articlesPath}`);
     } else {
       if (loginStatus === "failed") {
-        message.error("Invalid authorization data");
+        message.error("Недопустимые данные авторизации");
       }
     }
   }, [token, navigate, loginStatus, dispatch]);
@@ -44,18 +44,18 @@ export default function LoginForm() {
   return (
     <div className="formContainer">
       <form title="sign-in" onSubmit={handleSubmit(handleLogin)}>
-        <h4 className={styles.title}>Sign In</h4>
+        <h4 className={styles.title}>Вход</h4>
         <label>
-          <span>Email address</span>
+          <span>Email</span>
           <input
             type="text"
             name="email"
-            placeholder="Email address"
+            placeholder="Email"
             {...register("email", {
-              required: "Email is require field!",
+              required: "Email - обязательное поле!",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter valid email!",
+                message: "Пожалуйста, введите действительный email!",
               },
             })}
           />
@@ -64,24 +64,25 @@ export default function LoginForm() {
           )}
         </label>
         <label>
-          <span>Password</span>
+          <span>Пароль</span>
           <input
             type="password"
             name="confirmPassword"
-            placeholder="Password"
+            placeholder="Пароль"
             {...register("password", {
-              required: "Please enter your password here!",
+              required: "Пожалуйста, введите пароль!",
             })}
           />
         </label>
         {errors?.password && (
           <div className="validation-warning">{errors.password.message}</div>
         )}
-        <SubmitButton value="Login" class={styles.sendBtn} />
+        <SubmitButton value="Войти" class={styles.sendBtn} />
         <span className={styles.createProfileText}>
-          Don&apos;t have an account?
+          {/* Don&apos;t have an account? */}
+          Нет учётной записи?
           <NavLink to={`/${path.registerPath}`}>
-            {<span> Sign Up.</span>}
+            {<span> Создать.</span>}
           </NavLink>
         </span>
       </form>

@@ -15,7 +15,7 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(remove());
     localStorage.removeItem("user");
-    message.info("You are logged out");
+    message.info("Вы вышли из системы");
     navigate(path.articlesPath);
   };
 
@@ -24,13 +24,13 @@ export default function Header() {
   return (
     <header>
       <NavLink to="/">
-        <h6 className={style.logo}>Realworld Blog</h6>
+        <h6 className={style.logo}>Блог-платформа</h6>
       </NavLink>
 
       {token ? (
         <nav className={style.loggedInner}>
           <NavLink to={path.newArticlePath} tabIndex={-1}>
-            <SuccessButton>Create article</SuccessButton>
+            <SuccessButton>Написать статью</SuccessButton>
           </NavLink>
           <NavLink className={style.profile} to={path.profilePath}>
             <span>{username}</span>
@@ -38,16 +38,16 @@ export default function Header() {
               renderProfileImage(image, `${style.avatar}`)}
           </NavLink>
           <button onClick={() => handleLogout()} className={style.logout}>
-            Log Out
+            Выйти
           </button>{" "}
         </nav>
       ) : (
         <nav className={style.unloggedInner}>
           <NavLink tabIndex={-1} to={path.loginPath}>
-            <button className={style.login}>Sign In</button>
+            <button className={style.login}>Вход</button>
           </NavLink>
           <NavLink tabIndex={-1} to={path.registerPath}>
-            <SuccessButton>Sign Up</SuccessButton>
+            <SuccessButton>Регистрация</SuccessButton>
           </NavLink>
         </nav>
       )}
