@@ -1,0 +1,16 @@
+footer {
+  background-color: #fff;
+  box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.4);
+  margin-top: 30px;
+}
+
+.footer {
+  display: flex;
+  justify-content: end;
+  padding: 35px 0;
+}
+@media (max-width: 1050px) {
+  .footer {
+    padding-right: 16px;
+  }
+}

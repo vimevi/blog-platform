@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Header from "../header";
+import Footer from "../footer";
 import ArticleList from "../article-list";
 import NewAccountForm from "../form-items/new-account-form";
 import EditProfileForm from "../form-items/edit-profile-form";
@@ -15,23 +16,26 @@ export default function App() {
   return (
     <div>
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<ArticleList />} />
-          <Route path={path.articlesPath} element={<ArticleList />} />
-          <Route path={path.registerPath} element={<NewAccountForm />} />
-          <Route path={path.loginPath} element={<LoginForm />} />
-          <Route element={<PrivateRoutes />}>
-            <Route path={path.newArticlePath} element={<ArticleForm />} />
-            <Route path={path.profilePath} element={<EditProfileForm />} />
-            <Route path={path.editArticlePath} element={<ArticleForm />} />
-          </Route>
-          <Route path={path.articlePath} element={<ArticlePage />} />
-          <Route
-            path="*"
-            element={<h3 className="spin">Nothing was found: 404!</h3>}
-          />
-        </Routes>
+        <div className="wrapper">
+          <Header />
+          <Routes>
+            <Route path="/" element={<ArticleList />} />
+            <Route path={path.articlesPath} element={<ArticleList />} />
+            <Route path={path.registerPath} element={<NewAccountForm />} />
+            <Route path={path.loginPath} element={<LoginForm />} />
+            <Route element={<PrivateRoutes />}>
+              <Route path={path.newArticlePath} element={<ArticleForm />} />
+              <Route path={path.profilePath} element={<EditProfileForm />} />
+              <Route path={path.editArticlePath} element={<ArticleForm />} />
+            </Route>
+            <Route path={path.articlePath} element={<ArticlePage />} />
+            <Route
+              path="*"
+              element={<h3 className="spin">Nothing was found: 404!</h3>}
+            />
+          </Routes>
+          <Footer />
+        </div>
       </Router>
     </div>
   );

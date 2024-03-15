@@ -28,6 +28,7 @@ button:disabled {
   padding: 24px 16px;
   box-shadow: 4px 4px 13px 0px rgba(34, 60, 80, 0.16);
   margin-bottom: 16px;
+  gap: 20px;
 }
 
 .ArticleItem + .ArticleItem {
@@ -37,7 +38,7 @@ button:disabled {
 .firstLine {
   display: flex;
   justify-content: space-between;
-  width: 700px;
+  min-width: 700px;
   overflow-wrap: break-word;
   align-items: start;
 }
@@ -130,4 +131,48 @@ button:disabled {
   width: 46px;
   height: 46px;
   border-radius: 50%;
+}
+
+@media (max-width: 1050px) {
+  .ArticleItem {
+    margin: 0 15px;
+    flex-direction: column-reverse;
+    gap: 10px;
+    width: 100%;
+  }
+  .authorBlock {
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  .firstLine {
+    // display: flex;
+    // width: auto;
+    min-width: 400px;
+    display: block;
+    overflow-wrap: break-word;
+    align-items: start;
+  }
+  .title {
+    max-width: auto;
+  }
+
+  .avatar {
+    padding-left: 0;
+  }
+  .date {
+    margin-left: 0;
+  }
+  .author {
+    font-size: 14px;
+  }
+  .date {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 550px) {
+  .firstLine {
+    min-width: 100%;
+  }
 }

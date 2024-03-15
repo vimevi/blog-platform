@@ -1,5 +1,5 @@
 class ArticleService {
-  BASE_URL = "https://blog.kata.academy/api/";
+  BASE_URL = "https://blog.kata.academy/api/"; // https://api.realworld.io/api/
 
   async performRequest(url, method, token, content) {
     const fullUrl = new URL(this.BASE_URL + url);
