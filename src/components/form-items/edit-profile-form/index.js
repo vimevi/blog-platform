@@ -41,7 +41,7 @@ export default function EditProfileForm() {
       navigate(`/${path.articlesPath}`);
     }
   }, [editProfileStatus, navigate]);
-
+  const { isLight } = useSelector((store) => store.user);
   useEffect(() => {
     dispatch(clearRegisterData());
     setValue("username", username);
@@ -51,7 +51,10 @@ export default function EditProfileForm() {
 
   return (
     <div className="formContainer">
-      <form onSubmit={handleSubmit(handleEditProfile)}>
+      <form
+        className={isLight && "formDark"}
+        onSubmit={handleSubmit(handleEditProfile)}
+      >
         <h4 className={styles.title}>Редактировать профиль</h4>
         <label>
           <span>Имя пользователя</span>

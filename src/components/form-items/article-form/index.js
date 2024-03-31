@@ -42,6 +42,8 @@ export default function ArticleForm() {
     }
   };
 
+  const { isLight } = useSelector((store) => store.user);
+
   useEffect(() => {
     if (isEditing && article) {
       setValue("title", article.title);
@@ -76,7 +78,11 @@ export default function ArticleForm() {
 
   return (
     <div className="container-form">
-      <form title="article" onSubmit={handleSubmit(handleCreateArticle)}>
+      <form
+        className={isLight && "formDark"}
+        title="article"
+        onSubmit={handleSubmit(handleCreateArticle)}
+      >
         <h4 className={styles.title}>
           {isEditing ? "Редактирование статьи" : "Создавать новую статью"}
         </h4>

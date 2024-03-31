@@ -17,6 +17,8 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm();
 
+  const { isLight } = useSelector((store) => store.user);
+
   const navigate = useNavigate();
   const { token, loginStatus } = useSelector((store) => store.user);
   const dispatch = useDispatch();
@@ -43,7 +45,11 @@ export default function LoginForm() {
 
   return (
     <div className="formContainer">
-      <form title="sign-in" onSubmit={handleSubmit(handleLogin)}>
+      <form
+        className={isLight && "formDark"}
+        title="sign-in"
+        onSubmit={handleSubmit(handleLogin)}
+      >
         <h4 className={styles.title}>Вход</h4>
         <label>
           <span>Email</span>

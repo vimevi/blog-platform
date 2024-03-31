@@ -26,7 +26,7 @@ export default function ArticleItem({
   const [like, setLike] = useState(favorited);
   const [likes, setLikeCount] = useState(favoritesCount);
 
-  const { token } = useSelector((store) => store.user);
+  const { token, isLight } = useSelector((store) => store.user);
 
   const dispatch = useDispatch();
   const handleLike = () => {
@@ -59,7 +59,7 @@ export default function ArticleItem({
     : styles.likeCount;
 
   return (
-    <li className={styles.ArticleItem}>
+    <li className={!isLight ? styles.ArticleItem : styles.ArticleItemDark}>
       <div>
         <div className={styles.firstLine}>
           <NavLink to={`/articles/${slug}`}>
@@ -67,14 +67,15 @@ export default function ArticleItem({
               {utils.truncateTextAtWord(title, 100)}
             </h5>
           </NavLink>
-
-          <button
-            disabled={!token}
-            className={likeClassName}
-            onClick={handleLike}
-          >
-            {likes}
-          </button>
+          {token && (
+            <button
+              disabled={!token}
+              className={likeClassName}
+              onClick={handleLike}
+            >
+              {likes}
+            </button>
+          )}
         </div>
         <div className={styles.tags}>
           {tagList.slice(0, 10).map((tag, index) => (

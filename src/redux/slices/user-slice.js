@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instanceUserService from "../../api/user-service";
 
 const storedUser = JSON.parse(localStorage.getItem("user"));
+const storedIsLight = JSON.parse(localStorage.getItem("isLight"));
 
 const initialState = {
   isLoggedIn: false,
@@ -15,6 +16,7 @@ const initialState = {
   reloading: false,
   editProfileStatus: null,
   password: null,
+  isLight: storedIsLight?.isLight || false,
 };
 
 export const createUser = createAsyncThunk(
@@ -75,6 +77,10 @@ const userSlice = createSlice({
       state.loginStatus = "idle";
       state.error = null;
     },
+    setTheme(state) {
+      state.isLight = !state.isLight;
+      localStorage.setItem("isLight", state.isLight);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -129,5 +135,11 @@ const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { remove, create, loggedIn, clearRegisterData, clearLoginData } =
-  userSlice.actions;
+export const {
+  remove,
+  create,
+  loggedIn,
+  clearRegisterData,
+  clearLoginData,
+  setTheme,
+} = userSlice.actions;

@@ -2,12 +2,28 @@ footer {
   background-color: #fff;
   box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.4);
   margin-top: 30px;
+
+}
+.footerDark {
+  background-color: #313131;
+  color: #cdcdcd;
+  span {
+    color: #ffffff;
+  }
+
 }
 
 .footer {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   padding: 35px 0;
+}
+.footerRight, .footerLeft {
+  display: flex;
+  flex-direction: column;
+  span {
+    margin-bottom: 10px;
+  }
 }
 @media (max-width: 1050px) {
   .footer {

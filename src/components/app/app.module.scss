@@ -20,8 +20,13 @@ body {
   font-weight: 400;
   margin: 0;
   background-color: rgba(235, 238, 243, 1);
+
   overflow-x: hidden;
   // font-family: 'Roboto', sans-serif; // в какой-то момент понадобится
+}
+
+:global(.darkTheme) {
+  background-color: #1b1b1b;
 }
 
 ul {

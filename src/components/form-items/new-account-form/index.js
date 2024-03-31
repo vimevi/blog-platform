@@ -19,8 +19,9 @@ export default function NewAccountForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const { error, registerStatus, token } = useSelector((store) => store.user);
+  const { error, registerStatus, token, isLight } = useSelector(
+    (store) => store.user,
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,7 +57,11 @@ export default function NewAccountForm() {
 
   return (
     <div className="formContainer">
-      <form title="register" onSubmit={handleSubmit(handleRegister)}>
+      <form
+        className={isLight && "formDark"}
+        title="register"
+        onSubmit={handleSubmit(handleRegister)}
+      >
         <h4 className={styles.title}>Создать профиль</h4>
         <label>
           <span>Имя пользователя</span>

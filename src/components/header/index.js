@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import avatar from "../../assets/images/avatar.png";
-import { remove } from "../../redux/slices/user-slice";
+import { remove, setTheme } from "../../redux/slices/user-slice";
 import { message } from "antd";
 import { renderProfileImage } from "../../utils/general-utils/utils";
 import SuccessButton from "./success-button";
@@ -11,6 +11,8 @@ import * as path from "../../utils/router/paths";
 import menu from "../../assets/images/menu.svg";
 import close from "../../assets/images/close.png";
 import styles from "./header.module.scss";
+import theme from "../../assets/images/theme1.svg";
+import theme1 from "../../assets/images/theme2.svg";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,10 +31,14 @@ export default function Header() {
     return setIsMenuOpen(false);
   }, []);
 
-  const { token } = useSelector((store) => store.user);
+  const { token, isLight } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   return (
-    <header>
+    <header
+      className={
+        isLight ? `${styles.headerDark} ${styles.header}` : `${styles.header}`
+      }
+    >
       <NavLink to="/">
         <h6 className={styles.logo}>Блог-платформа</h6>
       </NavLink>
@@ -44,6 +50,23 @@ export default function Header() {
           <img src={!isMenuOpen ? menu : close} alt="" />
         </button>
       </nav>
+      <button
+        onClick={() => dispatch(setTheme())}
+        className={isLight ? styles.lightThemeSw : styles.darkThemeSw}
+        style={{
+          marginLeft: "auto",
+          marginRight: 58,
+          width: 16,
+          height: 16,
+          position: "relative",
+        }}
+      >
+        {isLight ? (
+          <img src={theme1} alt="" className={styles.theme} />
+        ) : (
+          <img src={theme} alt="" className={styles.theme} />
+        )}
+      </button>
       {token ? (
         <nav
           className={`${styles.loggedInner} ${isMenuOpen ? styles.showMenu : ""}`}
@@ -56,9 +79,12 @@ export default function Header() {
             {<img src={avatar} className={styles.avatar}></img> &&
               renderProfileImage(image, `${styles.avatar}`)}
           </NavLink>
-          <button onClick={() => handleLogout()} className={styles.logout}>
+          <button
+            onClick={() => handleLogout()}
+            className={`${styles.logout} ${isLight && styles.logoutDark}`}
+          >
             Выйти
-          </button>{" "}
+          </button>
         </nav>
       ) : (
         <nav

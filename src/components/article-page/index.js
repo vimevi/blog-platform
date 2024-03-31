@@ -21,11 +21,10 @@ export default function ArticlePage() {
   const { slug } = useParams();
   const dispatch = useDispatch();
   const { article } = useSelector((store) => store.article);
-  const { token, username = "" } = useSelector((store) => store.user);
+  const { token, isLight, username = "" } = useSelector((store) => store.user);
   const navigate = useNavigate();
 
   const [isMyArticle, setIsMyArticle] = useState(false);
-
   const [like, setLike] = useState(article.favorited);
   const [likes, setLikeCount] = useState(article.favoritesCount);
 
@@ -115,7 +114,9 @@ export default function ArticlePage() {
 
   return (
     <div className="container">
-      <section className={styles.ArticleItem}>
+      <section
+        className={!isLight ? styles.ArticleItem : styles.ArticleItemDark}
+      >
         <div>
           <div className={styles.firstLine}>
             <h5 className={styles.title}>{article.title}</h5>

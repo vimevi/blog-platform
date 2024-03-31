@@ -1,7 +1,7 @@
 $top-cursor: pointer;
 $success-color: rgba(82, 196, 26, 1);
 
-header {
+.header {
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -11,10 +11,17 @@ header {
   background: rgba(255, 255, 255, 1);
   margin-bottom: 24px;
   box-shadow: 2px 2px 8px 0px rgba(34, 60, 80, 0.2);
+  border-bottom: 3px solid transparent;
+
   button {
     border-radius: 5px;
     font-size: 18px;
   }
+}
+.headerDark {
+  background-color: #686868;
+  color: #cdcdcd;
+  border-bottom: 3px solid rgb(179, 179, 179);
 }
 button {
   background: transparent;
@@ -25,6 +32,14 @@ button {
     opacity: 0.8;
   }
 }
+
+.theme {
+  width: 30px;
+  // position: absolute;
+  margin-left: auto;
+  transform: translateY(-6px);
+}
+
 .loggedInner,
 .inLoggedInner {
   display: flex;
@@ -67,7 +82,10 @@ button {
     background-color: rgba(0, 0, 0, 1);
   }
 }
-
+.logoutDark {
+  color: white;
+  border: 1px solid white;
+}
 .logo {
   cursor: $top-cursor;
   font-weight: 400;

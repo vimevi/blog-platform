@@ -11,10 +11,12 @@ import ArticlePage from "../article-page";
 import PrivateRoutes from "../../utils/router/privateRouter";
 import * as path from "../../utils/router/paths";
 import "./app.module.scss";
+import { useSelector } from "react-redux";
 
 export default function App() {
+  const { isLight } = useSelector((store) => store.user);
   return (
-    <div>
+    <div className={isLight ? "darkTheme" : ""}>
       <Router>
         <div className="wrapper">
           <Header />
