@@ -1,5 +1,5 @@
 class userService {
-  BASE_URL = "https://blog.kata.academy/api/";
+  BASE_URL = "https://api.realworld.io/api/"; // https://blog.kata.academy/api/
 
   async performRequest(method, endpoint, credentials, token) {
     const url = this.BASE_URL + endpoint;
