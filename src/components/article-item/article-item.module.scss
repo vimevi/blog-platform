@@ -150,7 +150,7 @@ button:disabled {
 }
 
 @media (max-width: 1050px) {
-  .ArticleItem {
+  .ArticleItem, .ArticleItemDark {
     // margin: 0 15px;
     flex-direction: column-reverse;
     gap: 10px;
@@ -169,10 +169,12 @@ button:disabled {
     overflow-wrap: break-word;
     align-items: start;
   }
+  .likeCount {
+    margin-bottom: 10px;
+  }
   .title {
     max-width: auto;
   }
-
   .avatar {
     padding-left: 0;
   }
