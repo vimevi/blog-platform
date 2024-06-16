@@ -35,7 +35,6 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
-  background-color: #fff;
   padding: 24px 16px;
   box-shadow: 4px 4px 13px 0px rgba(34, 60, 80, 0.16);
   margin-bottom: 16px;
@@ -152,7 +151,7 @@ button:disabled {
 
 @media (max-width: 1050px) {
   .ArticleItem {
-    margin: 0 15px;
+    // margin: 0 15px;
     flex-direction: column-reverse;
     gap: 10px;
     width: 100%;

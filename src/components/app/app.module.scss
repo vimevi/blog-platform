@@ -64,9 +64,21 @@ section {
   flex-direction: column;
   justify-content: space-between;
 }
+@media (max-width: 1050px) {
+  :global(.container) {
+    max-width: 700px;
+  }
+}
 
 @media (max-width: 768px) {
   :global(.container) {
     max-width: 500px;
+  }
+}
+
+@media (max-width: 562px) {
+  :global(.container) {
+    max-width: 320px;
+    // margin: 0;
   }
 }
